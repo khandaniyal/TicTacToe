@@ -38,6 +38,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             arrayButtons[i].setOnClickListener(this);
         }
         playerRoundCount = 0;
+        currentPlayer = true;
     }
 
     @Override
@@ -63,11 +64,24 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         if(checkWinner() == true){
             if(currentPlayer){
                 Toast.makeText(this, "Player One Won!", Toast.LENGTH_SHORT).show();
+                playAgain();
+
             }
         }else if(playerRoundCount == 9){
-            currentPlayer = !currentPlayer;
             Toast.makeText(this, "Player Two Won!", Toast.LENGTH_SHORT).show();
+            playAgain();
+        }else{
+            currentPlayer = !currentPlayer;
+        }
+    }
 
+    private void playAgain() {
+        playerRoundCount = 0;
+        currentPlayer = true;
+
+        for (int i = 0; i < arrayButtons.length; i++){
+            gameState[i] = 2;
+            arrayButtons[i].setText("");
         }
     }
 
@@ -80,5 +94,4 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
         return winnerResult;
     }
-    public void resetGame(){}
 }
