@@ -3,6 +3,7 @@ package com.example.tictactoe;
 import static com.example.tictactoe.model.DefaultConstants.CONNECTION_KO;
 import static com.example.tictactoe.model.DefaultConstants.CONNECTION_OK;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     Button connect, start;
+
     EditText txtIP, txtPort;
     TextView txtResult;
 
     MainActivity instance;
-    Button[][] arrayButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,39 +32,25 @@ public class MainActivity extends AppCompatActivity {
         txtIP = findViewById(R.id.txtIP);
         txtPort = findViewById(R.id.txtPort);
 
-        start.setEnabled(false);
-        arrayButtons = new Button[3][3];
-
-        arrayButtons[0][0] = findViewById(R.id.btn00);
-        arrayButtons[0][1] = findViewById(R.id.btn01);
-        arrayButtons[0][2] = findViewById(R.id.btn02);
-        arrayButtons[1][0] = findViewById(R.id.btn10);
-        arrayButtons[1][1] = findViewById(R.id.btn11);
-        arrayButtons[1][2] = findViewById(R.id.btn12);
-        arrayButtons[2][0] = findViewById(R.id.btn20);
-        arrayButtons[2][1] = findViewById(R.id.btn21);
-        arrayButtons[2][2] = findViewById(R.id.btn22);
-
-        for(int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
-                arrayButtons[i][j].setEnabled(false);
-            }
-        }
-
+        //start.setEnabled(false);
         instance = this;
 
-        connect.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String ip = txtIP.getText().toString();
-                int port = Integer.valueOf(txtPort.getText().toString());
+        connect.setOnClickListener(e->{
+            String ip = txtIP.getText().toString();
+            int port = Integer.valueOf(txtPort.getText().toString());
 
-                if(!ip.equals("") && port!=0){
-                    ThreadConnection conn = new ThreadConnection(ip, port, instance);
-                    conn.execute();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Ip o port", Toast.LENGTH_LONG).show();
-                }
+            if(!ip.equals("") && port!=0){
+                ThreadConnection conn = new ThreadConnection(ip, port, instance);
+                conn.execute();
+
+            }else{
+                Toast.makeText(getApplicationContext(), "Ip o port", Toast.LENGTH_LONG).show();
             }
+        });
+
+        start.setOnClickListener(e->{
+            //go to game activity
+            startActivity(new Intent(this, Game.class));
         });
     }
 
