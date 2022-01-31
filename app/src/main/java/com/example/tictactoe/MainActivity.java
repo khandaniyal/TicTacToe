@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             String ip = txtIP.getText().toString();
             int port = Integer.valueOf(txtPort.getText().toString());
 
-            if(!ip.equals("") && port!=0){
+            if(!ip.equals("") && port!= 0){
                 conn = new ThreadConnection(ip, port, instance);
                 conn.execute();
 
@@ -53,8 +53,14 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(e->{
 
             Socket socket = conn.getSocket();
-            ThreadNewGame newGame = new ThreadNewGame(socket, instance);
-            newGame.execute();
+            ThreadNewGame newGame = null;
+            try {
+                newGame = new ThreadNewGame(socket, instance);
+                newGame.execute();
+
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
 
             //go to game activity
             startActivity(new Intent(this, Game.class));
