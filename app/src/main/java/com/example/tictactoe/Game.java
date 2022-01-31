@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
-
+    private Button reset;
     private Button[] arrayButtons;
     private int[][] winningPositions = {
             {0,1,2}, {3,4,5}, {6,7,8}, //rows
@@ -19,7 +19,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     };
     //p1 -> 0
     //p2 -> 1
-    //empty -> 2
+    //empty or null -> 2
     private int gameState[] = {2,2,2,2,2,2,2,2,2};
     private boolean currentPlayer;
     private int playerRoundCount = 0;
@@ -30,8 +30,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_game);
 
         arrayButtons = new Button[9];
+        reset = findViewById(R.id.btnReset);
 
-        for(int i = 0; i<arrayButtons.length; i++){
+        reset.setOnClickListener(e-> playAgain());
+
+        //get the button id from the layout and initialise them
+        for(int i = 0; i < arrayButtons.length; i++){
             String btnID = "btn" + i;
             int resourceID = getResources().getIdentifier(btnID, "id", getPackageName());
             arrayButtons[i] = (Button) findViewById(resourceID);
@@ -52,10 +56,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         if(currentPlayer){
             ((Button)view).setText("X");
+            ((Button)view).setTextSize(50);
             ((Button)view).setTextColor(Color.parseColor("#FFC34A"));
             gameState[gameStatePointer] = 0;
         }else {
             ((Button)view).setText("O");
+            ((Button)view).setTextSize(50);
             ((Button)view).setTextColor(Color.parseColor("#70FFEA"));
             gameState[gameStatePointer] = 1;
         }
@@ -63,14 +69,19 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         if(checkWinner() == true){
             if(currentPlayer){
+                playerRoundCount++;
                 Toast.makeText(this, "Player One Won!", Toast.LENGTH_SHORT).show();
                 playAgain();
-
+            }else{
+                playerRoundCount++;
+                Toast.makeText(this, "Player Two Won!", Toast.LENGTH_SHORT).show();
+                playAgain();
             }
         }else if(playerRoundCount == 9){
-            Toast.makeText(this, "Player Two Won!", Toast.LENGTH_SHORT).show();
             playAgain();
-        }else{
+            Toast.makeText(this, "It's a Draw!", Toast.LENGTH_SHORT).show();
+        }
+        else{
             currentPlayer = !currentPlayer;
         }
     }

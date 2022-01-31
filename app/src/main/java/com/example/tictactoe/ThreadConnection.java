@@ -73,4 +73,8 @@ public class ThreadConnection extends AsyncTask<Void, Void, Boolean> {
             instance.updateUI(CONNECTION_OK);
         }
     }
+
+    public Socket getSocket() {
+        return this.socket;
+    }
 }

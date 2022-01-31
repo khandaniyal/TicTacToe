@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     tools:context=".Game">
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
@@ -13,7 +14,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="374dp"
+        android:layout_marginBottom="200dp"
         android:background="#6455C4"
         android:backgroundTint="@color/dark_orange"
         android:orientation="horizontal"
@@ -35,19 +36,22 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:backgroundTint="@color/orange"
-                app:iconPadding="8dp" />
+                app:iconPadding="8dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btn1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btn2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,19 +64,22 @@
                 android:id="@+id/btn3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btn4"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btn5"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,20 +91,36 @@
                 android:id="@+id/btn6"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btn7"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btn8"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="162dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:backgroundTint="@color/orange"
+        android:text="Reset"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

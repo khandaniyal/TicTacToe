@@ -12,13 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+import java.net.Socket;
+
 public class MainActivity extends AppCompatActivity {
+    ThreadConnection conn;
 
     Button connect, start;
-
     EditText txtIP, txtPort;
     TextView txtResult;
-
     MainActivity instance;
 
     @Override
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         txtIP = findViewById(R.id.txtIP);
         txtPort = findViewById(R.id.txtPort);
 
-        //start.setEnabled(false);
+        start.setEnabled(false);
         instance = this;
 
         connect.setOnClickListener(e->{
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             int port = Integer.valueOf(txtPort.getText().toString());
 
             if(!ip.equals("") && port!=0){
-                ThreadConnection conn = new ThreadConnection(ip, port, instance);
+                conn = new ThreadConnection(ip, port, instance);
                 conn.execute();
 
             }else{
@@ -49,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         start.setOnClickListener(e->{
+
+            Socket socket = conn.getSocket();
+            ThreadNewGame newGame = new ThreadNewGame(socket, instance);
+            newGame.execute();
+
             //go to game activity
             startActivity(new Intent(this, Game.class));
         });
