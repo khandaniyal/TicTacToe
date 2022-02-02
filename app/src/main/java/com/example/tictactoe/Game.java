@@ -105,4 +105,14 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
         return winnerResult;
     }
+
+    public void clickPieza(View view) {
+        String tag = view.getTag().toString();
+        int cord1=Character.getNumericValue(tag.charAt(0));
+        int cord2=Character.getNumericValue(tag.charAt(1));
+
+        Log.i("Coordenadas", "" +  cord1 + " " + cord2);
+
+
+    }
 }
